@@ -1,26 +1,38 @@
+/*
+* Author: Tomas Ochoa
+* Date: 10/3/16
+* */
 "use strict";
 
+//Method that does rotation
+function doLeftRotation(a){
+    //Pop off element from the front of the array and save it in a local var
+    var firstEl = a.shift();
+
+    //Push to first to array
+    a.push(firstEl);
+}
+
+//Method that checks constraints and rotates 'd' times
 function rotateLeft(n,d,a){
-    //base case
-    if(d == 0)
-        return a;
-    else if (d >= 1 && d <= n){
-        var temp = [];                          //Temp to store result
-        var firstEl = a.shift();                //First element of original
-        var remaining = a.slice(0);             //Remaining elements
-
-        //Do rotation
-        temp = temp.concat(remaining);
-        temp.push(firstEl);
-
-        //Recursive call
-        return rotateLeft(n,d-1,temp);
+    //Check constraints
+    if( (n >= 1 && n <= 100000) && (d >= 1 && d <= n) &&  (a.length >= 1 && a.length <= 1000000)){
+        //Do d rotations d times
+        for (var i = 0; i < d; i++) {
+            //Call
+            doLeftRotation(a);
+        }
     }
 }
-//Initialize Variables
-var n = 5;
-var d = 4;
-var arr = [1,2,3,4,5];
 
-//Print answer
-console.log(rotateLeft(n,d,arr).join(" "));
+(function(){
+    var n = 5;      //Number of elements that arr will have
+    var d = 4;      //Number of rotations
+    var arr = [1,2,3,4,5];  //Array
+
+    rotateLeft(n,d,arr);
+
+    //Print answer
+    console.log(arr.join(" "));
+
+})();
