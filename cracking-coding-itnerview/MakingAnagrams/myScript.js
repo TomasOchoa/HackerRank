@@ -36,11 +36,11 @@
     // }
 }());
 
-/*
-* mapper:
-* - Returns a mapped string that contains unique
-*   letters used and number of occurrences
-* */
+/**
+ * mapper:
+ * @param str String to map
+ * @returns {Map}
+ */
 function mapper (str) {
     var stringMap = new Map();
 
@@ -57,21 +57,22 @@ function mapper (str) {
 
 }
 
-/*
-* anagram:
-* - Returns the number of letters to remove from
-*   both strings for both to be anagrams of each other
-*   - 0 == anagram
-*   - n>0 == number of letters necessary to remove to be an anagram
-* */
+/**
+ * anagram:
+ * @param a First string
+ * @param b Second String
+ * @return {number}
+ */
 function anagram(a,b) {
+    //Maps of strings
     var aMap = new Map(mapper(a));
     var bMap = new Map(mapper(b));
 
-    var charsSeen = [];
-    var totalSize=a.length+b.length;
-    var sameChars=0;
+    var charsSeen = [];                 //Array of seen characters
+    var totalSize=a.length+b.length;    //Total number of letters
+    var sameChars=0;                    //Number of same letters
 
+    //Loop through a and use a & b's maps to decide how many to remove
     for(let char of a){
         //If seen char, continue
         if(charsSeen.indexOf(char) != -1){
@@ -88,148 +89,143 @@ function anagram(a,b) {
         }
         charsSeen.push(char);
     }
-
-    var retVal = Math.abs(totalSize-sameChars);
-    console.log(retVal);
-
-    //Calculate how many to remove to make anagram
-    //if 0: It is an anagram
-    //else: Number of letters to remove to make anagram
+    return Math.abs(totalSize-sameChars);
 }
+/*
+ //CODE GRAVEYARD
+ // function anagram(a,b){
+ //Flag to check if a > b || a < b
+ // var is_aSmaller = a.length < b.length;
+ // var inString = new Map();
+ // var sameSize = a.length === b.length;
 
-//CODE GRAVEYARD
-// function anagram(a,b){
-//Flag to check if a > b || a < b
-// var is_aSmaller = a.length < b.length;
-// var inString = new Map();
-// var sameSize = a.length === b.length;
-
-//If a and b same length
-// if(sameSize){
-//     var toRemove = a.length+b.length;
-//
-//     for(let charA of a){
-//         for(let charB of b){
-//             if(charA===charB){
-//                 toRemove= Math.abs(toRemove-2);
-//             }
-//         }
-//     }
-//     console.log(toRemove);
-// }
-// //Else check which string is bigger
-// else{
-//     console.log(is_aSmaller);
-// }
-// console.log(is_aSmaller,sameSize);
-//
-//
-//     //Variables to hold maps of each letter and their occurrences
-//     var aMap = new Map();
-//     var bMap = new Map();
-//     var key = {};
-//
-//     //Map keys for string a
-//     for(let e of a){
-//         if(aMap.has(e)){
-//             key = aMap.get(e);
-//             key++;
-//             aMap.set(e,key);
-//         }
-//         else {
-//             aMap.set(e,1);
-//         }
-//     }
-//     //Map keys for string b
-//     for(let e of b){
-//         if(bMap.has(e)){
-//             key = bMap.get(e);
-//             key++;
-//             bMap.set(e,key);
-//         }
-//         else {
-//             bMap.set(e,1);
-//         }
-//     }
-//
-//     //Iterators for maps
-//     var aMapIter = aMap.entries();
-//     var bMapIter = bMap.entries();
-//
-//     var isAnagram = false;
-//
-//     for(let c of a){
-//         var count = 0;
-//         if(bMap.has(c)){
-//             if(count == bMap.size){
-//                 break;
-//             }
-//             count++;
-//             isAnagram=true;
-//         }
-//         else if(!bMap.has(c))
-//             isAnagram=false;
-//     }
-//     console.log(isAnagram);
-//
-//     // for(var pair of aMapIter){
-//     //     console.log(pair);
-//     //     console.log(aMapIter.next().valueOf().);
-//     // }
-//     // console.log(aMapIter.next());
-//     // console.log(aMapIter.next());
-//     // console.log(aMapIter.next());
-//
-//
-//
-//
-//
-//
-//     // if(aMap.size===bMap.size){
-//     //     //Flag that stays true if the strings are still anagrams
-//     //     var val;
-//     //     do{
-//     //         console.log(aMapIter.next().value());
-//     //     }while (aMapIter.next().value!=null);
-//     //     // console.log(aMapIter.next());
-//     //     // console.log(aMapIter.next());
-//     //
-//     //
-//     //
-//     //
-//     // }
-//
-//     // console.log(aMap);
-//     // console.log();
-//     // console.log(bMap);
-//
-//
-//     //if a has the same keys and values
-//         //Its an anagram, return 0
-//     //Else
-//         //Not an anagram, figure out the amount of characters necessary to convert to an anagram
-//         //Return that amount
-//
-//     // console.log(aMap);
-//     // console.log(bMap);
-// }
-// console.log(sameSize);
-// for(let charA of a){
-//     for(let charB of b){
-//         if(charA===charB && !inString.has(charA)){
-//             inString.set(charA,1);
-//             console.log(charA,charA);
-//             break;
-//         }
-//         else if (charA===charB && inString.has(charA)){
-//             console.log(charB,'is mapped, increment');
-//             var count = inString.get(charA);
-//             count++;
-//             inString.set(charA,count);
-//         }
-//         else{
-//             console.log(a,b);
-//         }
-//     }
-//     console.log(inString.entries());
-// }
+ //If a and b same length
+ // if(sameSize){
+ //     var toRemove = a.length+b.length;
+ //
+ //     for(let charA of a){
+ //         for(let charB of b){
+ //             if(charA===charB){
+ //                 toRemove= Math.abs(toRemove-2);
+ //             }
+ //         }
+ //     }
+ //     console.log(toRemove);
+ // }
+ // //Else check which string is bigger
+ // else{
+ //     console.log(is_aSmaller);
+ // }
+ // console.log(is_aSmaller,sameSize);
+ //
+ //
+ //     //Variables to hold maps of each letter and their occurrences
+ //     var aMap = new Map();
+ //     var bMap = new Map();
+ //     var key = {};
+ //
+ //     //Map keys for string a
+ //     for(let e of a){
+ //         if(aMap.has(e)){
+ //             key = aMap.get(e);
+ //             key++;
+ //             aMap.set(e,key);
+ //         }
+ //         else {
+ //             aMap.set(e,1);
+ //         }
+ //     }
+ //     //Map keys for string b
+ //     for(let e of b){
+ //         if(bMap.has(e)){
+ //             key = bMap.get(e);
+ //             key++;
+ //             bMap.set(e,key);
+ //         }
+ //         else {
+ //             bMap.set(e,1);
+ //         }
+ //     }
+ //
+ //     //Iterators for maps
+ //     var aMapIter = aMap.entries();
+ //     var bMapIter = bMap.entries();
+ //
+ //     var isAnagram = false;
+ //
+ //     for(let c of a){
+ //         var count = 0;
+ //         if(bMap.has(c)){
+ //             if(count == bMap.size){
+ //                 break;
+ //             }
+ //             count++;
+ //             isAnagram=true;
+ //         }
+ //         else if(!bMap.has(c))
+ //             isAnagram=false;
+ //     }
+ //     console.log(isAnagram);
+ //
+ //     // for(var pair of aMapIter){
+ //     //     console.log(pair);
+ //     //     console.log(aMapIter.next().valueOf().);
+ //     // }
+ //     // console.log(aMapIter.next());
+ //     // console.log(aMapIter.next());
+ //     // console.log(aMapIter.next());
+ //
+ //
+ //
+ //
+ //
+ //
+ //     // if(aMap.size===bMap.size){
+ //     //     //Flag that stays true if the strings are still anagrams
+ //     //     var val;
+ //     //     do{
+ //     //         console.log(aMapIter.next().value());
+ //     //     }while (aMapIter.next().value!=null);
+ //     //     // console.log(aMapIter.next());
+ //     //     // console.log(aMapIter.next());
+ //     //
+ //     //
+ //     //
+ //     //
+ //     // }
+ //
+ //     // console.log(aMap);
+ //     // console.log();
+ //     // console.log(bMap);
+ //
+ //
+ //     //if a has the same keys and values
+ //         //Its an anagram, return 0
+ //     //Else
+ //         //Not an anagram, figure out the amount of characters necessary to convert to an anagram
+ //         //Return that amount
+ //
+ //     // console.log(aMap);
+ //     // console.log(bMap);
+ // }
+ // console.log(sameSize);
+ // for(let charA of a){
+ //     for(let charB of b){
+ //         if(charA===charB && !inString.has(charA)){
+ //             inString.set(charA,1);
+ //             console.log(charA,charA);
+ //             break;
+ //         }
+ //         else if (charA===charB && inString.has(charA)){
+ //             console.log(charB,'is mapped, increment');
+ //             var count = inString.get(charA);
+ //             count++;
+ //             inString.set(charA,count);
+ //         }
+ //         else{
+ //             console.log(a,b);
+ //         }
+ //     }
+ //     console.log(inString.entries());
+ // }
+* */
