@@ -89,49 +89,49 @@ function anagram(a,b){
 * - Uses sorted array to create a map
 * - returns map
 **/
-function mapper(str) {
-    var strArr = [];        //Variable to hold the string in array format
-    var strMap = [];        //Variable for map
-
-    //Convert to Array
-    for(var i=0;i<str.length;i++){
-        strArr.push(str[i]);
-    }
-
-    //Sort the array
-    strArr = strArr.sort();
-
-    //variables to store prev,curr,and next values in for loop
-    var prev,curr,next=null;
-    var count = 0;
-
-    //Create a Map that holds the unique letters used, and numver of occurrences of each
-    for(i=0;i<strArr.length;i++){
-        curr=strArr[i];
-        next=strArr[i+1];
-
-        if(prev!=curr) {
-            count=1;
-            if(curr!=next){
-                strMap.push({letter:curr,occurrences:count});
-            }
-        }
-        else {
-            count++;
-            if(curr!=next){
-                strMap.push({letter:curr,occurrences:count});
-            }
-        }
-        prev=curr;
-    }
-    return strMap;
-}
-
-//Main Function
-(function () {
-    var a = 'dad';
-    var b = 'add';
-
-    anagram(a,b);
-})();
-
+// function mapper(str) {
+//     var strArr = [];        //Variable to hold the string in array format
+//     var strMap = [];        //Variable for map
+//
+//     //Convert to Array
+//     for(var i=0;i<str.length;i++){
+//         strArr.push(str[i]);
+//     }
+//
+//     //Sort the array
+//     strArr = strArr.sort();
+//
+//     //variables to store prev,curr,and next values in for loop
+//     var prev,curr,next=null;
+//     var count = 0;
+//
+//     //Create a Map that holds the unique letters used, and numver of occurrences of each
+//     for(i=0;i<strArr.length;i++){
+//         curr=strArr[i];
+//         next=strArr[i+1];
+//
+//         if(prev!=curr) {
+//             count=1;
+//             if(curr!=next){
+//                 strMap.push({letter:curr,occurrences:count});
+//             }
+//         }
+//         else {
+//             count++;
+//             if(curr!=next){
+//                 strMap.push({letter:curr,occurrences:count});
+//             }
+//         }
+//         prev=curr;
+//     }
+//     return strMap;
+// }
+//
+// //Main Function
+// (function () {
+//     var a = 'dad';
+//     var b = 'add';
+//
+//     anagram(a,b);
+// })();
+//
