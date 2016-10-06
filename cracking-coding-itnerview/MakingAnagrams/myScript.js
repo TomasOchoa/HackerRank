@@ -1,39 +1,20 @@
-/**
- Created by Tom's Desktop on 10/5/2016.
- A NOTE ON MAPS:
-
- Maps do not support the [subscript] notation used by Objects.
- That syntax implicitly casts the subscript value to a primitive string or symbol.
- Maps support any values as keys, so you must use the methods
-
- .get(key)
- .set(key, value)
- .has(key)
-
- var m = new Map();
- var key1 = 'key1';
- var key2 = {};
- var key3 = {};
-
- m.set(key1, 'value1');
- m.set(key2, 'value2');
-
- console.assert(m.has(key2), "m should contain key2.");
- console.assert(!m.has(key3), "m should not contain key3.");
- */
-
 "use strict";
 //main:
 (function () {
-    // var a = test.test2.a;
-    // var b = test.test2.b;
-    var a = 'cde';
-    var b = 'abc';
-    anagram(a,b);
+    // var a = 'bacdc';
+    // var b = 'dcbac';
+
+    var a = 'bacdc';
+    var b = 'dcbad';
+
+    // var a = 'tttttttttttttttttttttttttttttttttttttsssssssssssssssss';
+    // var b = 'sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss';
+
+
     //Only perform action if constraints are met
-    // if((a.length>=1 && a.length <= 10000)&&((b.length>=1 && b.length <= 10000))){
-    //     console.log(anagram(a,b));
-    // }
+    if((a.length>=1 && a.length <= 10000)&&((b.length>=1 && b.length <= 10000))){
+        console.log(anagram(a,b));
+    }
 }());
 
 /**
@@ -74,13 +55,14 @@ function anagram(a,b) {
 
     //Loop through a and use a & b's maps to decide how many to remove
     for(let char of a){
+        console.log(char);
         //If seen char, continue
         if(charsSeen.indexOf(char) != -1){
-            // console.log('seen');
+            console.log('seen');
             continue;
         }
         else {
-            // console.log('!seen');
+            console.log('!seen');
             if(bMap.has(char)){
                 var inA = aMap.get(char);
                 var inB = bMap.get(char);
@@ -91,6 +73,29 @@ function anagram(a,b) {
     }
     return Math.abs(totalSize-sameChars);
 }
+/*
+ Created by Tom's Desktop on 10/5/2016.
+ A NOTE ON MAPS:
+
+ Maps do not support the [subscript] notation used by Objects.
+ That syntax implicitly casts the subscript value to a primitive string or symbol.
+ Maps support any values as keys, so you must use the methods
+
+ .get(key)
+ .set(key, value)
+ .has(key)
+
+ var m = new Map();
+ var key1 = 'key1';
+ var key2 = {};
+ var key3 = {};
+
+ m.set(key1, 'value1');
+ m.set(key2, 'value2');
+
+ console.assert(m.has(key2), "m should contain key2.");
+ console.assert(!m.has(key3), "m should not contain key3.");
+ */
 /*
  //CODE GRAVEYARD
  // function anagram(a,b){
