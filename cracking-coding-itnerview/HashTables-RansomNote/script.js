@@ -2,29 +2,41 @@
  * Created by Tom's Desktop on 10/7/2016.
  */
 
-/*
-Sample Input:
-
-6 4
-give me one grand today night
-give one grand today
-
-*/
 "use strict";
 
 /**
  * Main:
  */
 (function(){
-
-    var m = 6;      //Number of words available in magazine
-    var n = 4;      //Number of words that make up the ransom note
-
-    var magazine = ['give','me','one','grand','today','night3'];     //Available words in magazine
-    var ransom = ['give','one','grand','today'];                    //Letters that make up the note
-
+    // var magazine = ['give','me','one','grand','today','night3'];     //Available words in magazine
+    // var ransom = ['give','one','grand','today'];                    //Letters that make up the note
+    // console.log(m,n,magazine,ransom);
     // console.log(ransomNote(m,n,magazine,ransom));
+    var m = 15;      //Number of words available in magazine
+    var n = 17;      //Number of words that make up the ransom note
+
+    var magazine = [];
+    var mag = 'o l x imjaw bee khmla v o v o imjaw l khmla imjaw x'.split(' ');
+    for(let word of mag){
+        magazine.push(word)
+    }
+
+    var ransom = [];
+    var r='imjaw l khmla x imjaw o l l o khmla v bee o o imjaw imjaw o'.split(' ');
+    for(let word of r){
+        ransom.push(word);
+    }
+
+    // console.log(magazine);
+    // console.log(magazine.length === m);
+    // console.log();
+    // console.log(ransom);
+    // console.log(ransom.length === n);
+    // console.log();
+
     console.log(ransomNote(m,n,magazine,ransom));
+
+
 
 }());
 
@@ -85,25 +97,34 @@ function mapper (wordBank){
  * @return 'Yes' if possible, 'No' if not
  */
 function ransomNote(m,n,mag,note) {
-
     //Map variables
     var magMap = new Map(mapper(mag));
+    var noteMap = new Map(mapper(note));
+
+    //Flag that is set to true
+    var CAN_ENCRYPT = false;
 
     //Check constraints
     if((1 <= m && m <= 30000) && (1 <= n && n <= 30000)){
-        if(mag.length === m && note.length === n){
+        //Check if the ransom note can be recreated ONLY using available words in the magazine
+        //Check magazine map if the word is in there
+        for(let mappedWord of noteMap){
+            var searchWord = mappedWord[0];
+            var inRansomNote = mappedWord[1];
 
-            //Check if the ransome note can be recreated ONLY using available words in the magazine
-            for(let word of note){
-                //Check mag map
-                if(!magMap.has(word)){
-                    return 'No';
+            //Check if in map
+            if(magMap.has(searchWord)){
+                var inMagazine = magMap.get(searchWord);
+
+                //If note has searchWord <= that in magazine, you can encrypt the note
+                if(!(inRansomNote <= inMagazine)){
+                    CAN_ENCRYPT=false;
+                    break;
                 }
-                // else {
-                //     console.log(word,'isnt in magazine.Cant be hashed');
-                // }
+                else
+                    CAN_ENCRYPT=true;
             }
-            return 'Yes';
         }
     }
+    return CAN_ENCRYPT == true ? 'Yes':'No';
 }
