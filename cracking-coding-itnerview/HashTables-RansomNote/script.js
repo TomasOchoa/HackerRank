@@ -8,10 +8,6 @@
  * Main:
  */
 (function(){
-    // var magazine = ['give','me','one','grand','today','night3'];     //Available words in magazine
-    // var ransom = ['give','one','grand','today'];                    //Letters that make up the note
-    // console.log(m,n,magazine,ransom);
-    // console.log(ransomNote(m,n,magazine,ransom));
     var m = 15;      //Number of words available in magazine
     var n = 17;      //Number of words that make up the ransom note
 
@@ -21,11 +17,13 @@
     for(let word of mag){
         magazine.push(word)
     }
+
     var ransom = [];
     var r='imjaw l khmla x imjaw o l l o khmla v bee o o imjaw imjaw o'.split(' ');
     for(let word of r){
         ransom.push(word);
     }
+
     console.log(ransomNote(m,n,magazine,ransom));
 }());
 
@@ -57,7 +55,6 @@ function alphabetVerify(word){
  * @return {Map}
  */
 function mapper (wordBank){
-
     var wordMap = new Map();
 
     //Map words passed
