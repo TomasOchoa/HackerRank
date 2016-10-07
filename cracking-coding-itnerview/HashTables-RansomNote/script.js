@@ -15,29 +15,18 @@
     var m = 15;      //Number of words available in magazine
     var n = 17;      //Number of words that make up the ransom note
 
+    //Test variables
     var magazine = [];
     var mag = 'o l x imjaw bee khmla v o v o imjaw l khmla imjaw x'.split(' ');
     for(let word of mag){
         magazine.push(word)
     }
-
     var ransom = [];
     var r='imjaw l khmla x imjaw o l l o khmla v bee o o imjaw imjaw o'.split(' ');
     for(let word of r){
         ransom.push(word);
     }
-
-    // console.log(magazine);
-    // console.log(magazine.length === m);
-    // console.log();
-    // console.log(ransom);
-    // console.log(ransom.length === n);
-    // console.log();
-
     console.log(ransomNote(m,n,magazine,ransom));
-
-
-
 }());
 
 /**
