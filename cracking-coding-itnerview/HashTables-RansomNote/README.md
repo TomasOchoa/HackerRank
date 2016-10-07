@@ -42,3 +42,24 @@ Yes
 ### Explanation
 
 All four words needed to write an untraceable replica of the ransom note are present in the magazine, so we print Yes as our answer.
+
+#### ASCII Keys For ***`'a'`***-***`'z'`*** && ***`'A'`***-***`'Z'`*** (Decimal | Hex)
+
+###### Lowercase
+```
+a: 97d | 61h
+.
+.
+.
+z: 122d | 7Ah
+```
+ 
+ ###### Uppercase
+ 
+ ```
+ A: 65d | 41h
+ .
+ .
+ .
+ Z: 90d | 5Ah
+ ```
