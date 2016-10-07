@@ -77,7 +77,12 @@ function mapper (wordBank){
 }
 
 /**
- * ransomNote:
+ * ransomNote: Decides if a ransome not can be encrypted using magazine words
+ * @param m Number of magazine words inputed
+ * @param n Number of words in the ransom note
+ * @param mag Array of the words within the magazine
+ * @param note Array of the words that create the note
+ * @return 'Yes' if possible, 'No' if not
  */
 function ransomNote(m,n,mag,note) {
 
