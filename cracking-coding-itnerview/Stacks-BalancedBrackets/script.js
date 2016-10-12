@@ -13,15 +13,43 @@
     //Do check only if meet constraints
     if((n >= 1 && n <= 1000) && (s.length >= 1 && s.length <= 1000)){
         //For loop to check each string
-        for(var i=0;i<3;i++){
+        // for(var i=0;i<3;i++){
             //Call balanced bracket
             console.log(balancedBracket(s));
-        }
+            // balancedBracket(s);
+        // }
     }
 }());
 
 function balancedBracket(str){
-    console.log(str);
+    var expStack = [];
+    var peek = '';
+
+    //Loop through the whole string first
+    for(let bracket of str){
+        //Peek at the top of the stack
+        peek = expStack[expStack.length-1];
+
+        //Push opening brackets
+        if(bracket ==='{' || bracket==='(' || bracket==='['){
+            expStack.push(bracket);
+            // console.log("'"+bracket+"' is an open bracket");
+            // console.log("top of stack: '"+peek+"'");
+        }
+        //Else it's a closing bracket, check if top is pair
+        else {
+            // console.log("'"+bracket+"' is a closing bracket");
+            // console.log("top of stack: '"+peek+"'");
+
+            if((peek === '{' && bracket === '}') || (peek === '[' && bracket === ']') || (peek === '(' && bracket === ')')){
+                expStack.pop();
+                // console.log('match...continue');
+            }
+            else{
+                return 'NO';
+            }
+        }
+    }
     return 'YES';
 }
 
