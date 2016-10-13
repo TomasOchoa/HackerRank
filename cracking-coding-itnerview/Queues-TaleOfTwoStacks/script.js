@@ -45,17 +45,40 @@ function Queue(){
  * 2. dequeue
  * 3. Print head
  */
-function processData(input) {
-    var q = parseInt(input[0]);                 //Number of queries
-    var queueInstructions = input.splice(1);    //instruction set
-    var queue = new Queue();
+//My Version (NOT COMPATIBLE WITH PROBLEM)
+// function processData(input) {
+//     var q = parseInt(input[0]);                 //Number of queries
+//     var queueInstructions = input.splice(1);    //instruction set
+//     var queue = new Queue();
+//
+//     for (var i = 0; i < q; i++) {
+//         var query = queueInstructions[i].split(' ');       //For syntactical purposes
+//         var type = parseInt(query[0]);
+//
+//         if (type === 1) {
+//             var x = parseInt(query[1]);       //Element to queue
+//             queue.enqueue(x);
+//         }
+//         else if (type === 2)
+//             queue.dequeue();
+//         else if (type === 3)
+//             queue.print();
+//     }
+// }
 
-    for (var i = 0; i < q; i++) {
-        var query = queueInstructions[i].split(' ');       //For syntactical purposes
+//For compatible
+function processData(input) {
+    var queueInstructions = input.split('\n');      //Get instriction set
+    var q = parseInt(queueInstructions[0]);         //q
+    var queue = new Queue();                        //Queue constructor
+
+    //console.log(queryInstructions, q)
+
+    for(var i=0;i < q;i++){
+        var query = queueInstructions[i].split(' ');//For syntactical purposes
         var type = parseInt(query[0]);
 
-        if (type === 1) {
-            var x = parseInt(query[1]);       //Element to queue
+        if(type===1){var x = parseInt(query[1]);    //Element to queue
             queue.enqueue(x);
         }
         else if (type === 2)
