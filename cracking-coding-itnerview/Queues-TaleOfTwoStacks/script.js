@@ -45,45 +45,50 @@ function Queue(){
  * 2. dequeue
  * 3. Print head
  */
-//My Version (NOT COMPATIBLE WITH PROBLEM)
+//For compatible
 // function processData(input) {
-//     var q = parseInt(input[0]);                 //Number of queries
-//     var queueInstructions = input.splice(1);    //instruction set
-//     var queue = new Queue();
+//     var queueInstructions = input.split('\n');      //Get instriction set
+//     var q = parseInt(queueInstructions[0]);         //q
+//     var queue = new Queue();                        //Queue constructor
 //
-//     for (var i = 0; i < q; i++) {
-//         var query = queueInstructions[i].split(' ');       //For syntactical purposes
+//     for(var i=1;i <= q;i++){
+//         var query = queueInstructions[i].split(' ');//For syntactical purposes
 //         var type = parseInt(query[0]);
 //
-//         if (type === 1) {
-//             var x = parseInt(query[1]);       //Element to queue
+//         if(type===1){var x = parseInt(query[1]);    //Element to queue
 //             queue.enqueue(x);
 //         }
 //         else if (type === 2)
 //             queue.dequeue();
-//         else if (type === 3)
+//         else if (type === 3){
+//             console.log(type);
 //             queue.print();
+//         }
 //     }
 // }
-
-//For compatible
+//My Version (NOT COMPATIBLE WITH PROBLEM)
 function processData(input) {
-    var queueInstructions = input.split('\n');      //Get instriction set
-    var q = parseInt(queueInstructions[0]);         //q
-    var queue = new Queue();                        //Queue constructor
+    var q = parseInt(input[0]);                 //Number of queries
+    var queueInstructions = input.splice(1);    //instruction set
+    var queue = new Queue();
 
-    //console.log(queryInstructions, q)
+    //Check constraints of q
+    if(q >= 1 && q <= 100000){
+        for(var i=0;i < q;i++){
+            var query = queueInstructions[i].split(' ');//For syntactical purposes
+            var type = parseInt(query[0]);
 
-    for(var i=0;i < q;i++){
-        var query = queueInstructions[i].split(' ');//For syntactical purposes
-        var type = parseInt(query[0]);
-
-        if(type===1){var x = parseInt(query[1]);    //Element to queue
-            queue.enqueue(x);
+            //Check for constraints of type
+            if((type===1) && (type <= 1 && type <= 3)){
+                var x = parseInt(query[1]);    //Element to queue
+                //Check for x constraints
+                if(Math.abs(x)>= 1 && Math.abs(x) <= 100000)
+                    queue.enqueue(x);
+            }
+            else if (type === 2)
+                queue.dequeue();
+            else if (type === 3)
+                queue.print();
         }
-        else if (type === 2)
-            queue.dequeue();
-        else if (type === 3)
-            queue.print();
     }
 }
