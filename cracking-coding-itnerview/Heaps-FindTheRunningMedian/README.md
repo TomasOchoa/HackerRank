@@ -54,6 +54,7 @@ number scaled to **`1`** decimal place (i.e., **`12.3`** format).
 ## Explanation
 
 There are **``** integers, so we must print the new median on a new line as each integer is added to the list:
+
 1. **`list = {12}, median = 12.0`**
 2. **`list = {12,4} -> {4,12}, median = (12+4)/2 = 8.0`**
 3. **`list = {12,4,5} -> {4,5,12}, median = 5.0`**
