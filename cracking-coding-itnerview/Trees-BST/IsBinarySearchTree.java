@@ -42,7 +42,7 @@ void traverse(Node node){
 
     //Insert data in arraylist
     treeData.add(node.data);
-
+    
     if(node.right != null)
         traverse(node.right);
 }
