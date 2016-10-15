@@ -72,6 +72,7 @@
 // }
 
 //======================================CODE FOR MY IDE========================================
+//NOTE: This is MY VERSION of solving it. Heap version coming next
 (function main() {
     //Input
     // var rawInput = '6\n12\n4\n5\n3\n8\n7';      //Sample Input
