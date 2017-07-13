@@ -1,23 +1,12 @@
-process.stdin.resume();
-process.stdin.setEncoding('ascii');
-
-var input_stdin = "";
-var input_stdin_array = "";
-var input_currentline = 0;
-
-process.stdin.on('data', function (data) {
-	input_stdin += data;
-});
-
-process.stdin.on('end', function () {
-	input_stdin_array = input_stdin.split("\n");
-	main();
-});
-
+/**
+ * Created by Tomas Ochoa on 5/17/2017.
+ */
 function readLine() {
-	return input_stdin_array[input_currentline++];
+	var input = "4\nadd hack\nadd hackerrank\nfind hac\nfind hak\n";
+	
+	return input;
 }
-/////////////// ignore above this line ////////////////////
+
 /**
  * Function that stores the parameter as a new contact in the app
  * @param name String denoting a contact name
@@ -42,14 +31,17 @@ function findPartial(partial) {
 	return count;
 }
 
-//Array to hold contacts
 var contacts = [];
 
-function main() {
+(function main() {
 	var n = parseInt(readLine());
+	var tempString = readLine().split('\n');
+	tempString.pop();
+	tempString.shift();
+	
 	if((n>=1)&&(n<=100000)){
-		for(var a0 = 0; a0 < n; a0++){
-			var op_temp = readLine().split(' ');
+		for(var a0=0;a0<n;a0++){
+			var op_temp = tempString[a0].split(' ');
 			var op = op_temp[0];
 			var contact = op_temp[1];
 			if(contact.length>=1 && contact.length<=21){
@@ -62,4 +54,4 @@ function main() {
 			}
 		}
 	}
-}
+}());
