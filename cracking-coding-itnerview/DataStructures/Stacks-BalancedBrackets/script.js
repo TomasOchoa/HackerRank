@@ -1,69 +1,67 @@
+process.stdin.resume();
+process.stdin.setEncoding('ascii');
+
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
+
+process.stdin.on('data', function (data) {
+	input_stdin += data;
+});
+
+process.stdin.on('end', function () {
+	input_stdin_array = input_stdin.split("\n");
+	main();
+});
+
+function readLine() {
+	return input_stdin_array[input_currentline++];
+}
+
+/////////////// ignore above this line ////////////////////
 /**
- * Created by Tom's Desktop on 10/11/2016.
+ * Function To Check if brackets passed are paired
  */
-"use strict";
-
-//Main
-(function (){
-    var t  = 3;                         //Integer that denotes the number of strings
-    // var expression = '{[()]}';       //First string to test. (Balanced)
-    // var expression = '{[(])}';       //Second string to test (Not balanced)
-    // var expression = '{{[[(())]]}}';    //Third test string. (Balanced)
-    var expression = '{[{((({}{({({()})()})[]({()[[][][]]}){}}))){}}]}{}{({((){{}[][]{}[][]{}}[{}])(())}[][])}'; //Test case 4, line 17. (NO)
-    // var expression = '{';
-
-    //Do check only if meet constraints
-    if((t >= 1 && t <= 1000) && (expression.length >= 1 && expression.length <= 1000)){
-        console.log(balancedBracket(expression));
-    }
-}());
+function checkPair(open,closed){
+	if((open === '{' && closed === '}') || (open === '[' && closed === ']') || (open === '(' && closed === ')'))
+		return true
+	else
+		return false;
+}
 
 /**
- * balancedBracket:
- * @param str The string of brackets to check if balanced
- * @returns 'YES' if balanced. 'NO' if not balanced.
- */
-// function balancedBracket(str){
-//     if(str.length === 1){
-//         return 'NO';
-//     }
-//
-//     var expStack = [];      //Stack array that holds closed brackets
-//     var peek = '';          //Variable to hold the value at the top of the stack
-//     var bracket = '';       //Variable to hold the vale of the bracket at i (For syntactical purposes)
-//
-//     for(var i=0;i<str.length;i++){
-//         bracket = str[i];
-//         peek = expStack[expStack.length-1];
-//
-//         //If loop iteration started and peek undefined, that means there are multiple balanced brackets. (Not within each other)
-//         //If open, push to stack
-//         if((bracket === '{' || bracket === '[' || bracket === '(')){
-//             expStack.push(bracket);
-//         }
-//         else if(i>0 && peek === undefined){
-//             return 'NO';
-//         }
-//         //Check for open/closed brackets and pairings
-//         else {
-//             //If a pair exists, pop the closing pair bracket from stack
-//             if((peek === '{' && bracket === '}') || (peek === '[' && bracket === ']') || (peek === '(' && bracket === ')'))
-//                 expStack.pop();
-//             //Else unbalanced
-//             else
-//                 return 'NO';
-//         }
-//     }
-//     //If program reaches here, bracket is balanced
-//     return 'YES';
-// }
+ * Function to do actual check
+ **/
+function doCheck(bracketExpression){
+	//Stack to check if bracket in order
+	var stack = [];
 
-//2nd version
-function balancedBracket(str){
-    if(str.length === 1){
-        return 'NO';
-    }
+	//For each bracket in expression
+	for(let bracket of bracketExpression){
+		//If a opening bracket push to stack
+		if(bracket === '{' || bracket === '[' || bracket === '('){
+			stack.push(bracket);
+		}
 
-    //If reaches here, then balanced
-    return 'YES';
+		//If a closing bracket and stack empty, expression is not balanced
+		if((bracket === '}' || bracket === ']' || bracket === ')') && stack.length === 0){
+			return 'NO';
+		}
+		//Else if a closing bracket and stack not empty check if balanced
+		else if((bracket === '}' || bracket === ']' || bracket === ')') && stack.length !== 0){
+			//If the pair check returns false, expression imbalanced
+			if(!checkPair(stack.pop(),bracket))
+				return 'NO';
+		}
+	}
+	//If code reaches here and stack is empty it is balanced, else it is not
+	return stack.length > 0 ? 'NO':'YES';
+}
+
+function main() {
+	var t = parseInt(readLine());
+	for(var a0 = 0; a0 < t; a0++){
+		var expression = readLine();
+		console.log(doCheck(expression));
+	}
 }
